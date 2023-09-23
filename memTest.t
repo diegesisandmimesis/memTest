@@ -2,6 +2,15 @@
 //
 // memTest.t
 //
+//	A TADS3 module that provides a simple mechanism for doing 
+//	before and after testing of savefile size.
+//
+// BASIC USAGE
+//
+//	Create a "reference" save file using:
+//
+//		
+//
 #include <adv3.h>
 #include <en_us.h>
 
@@ -129,24 +138,22 @@ memTest: PreinitObject
 		if((sz0 = getFileSize(fname0)) == nil)
 			return(nil);
 
-		// Make sure we have a test save to compare.
-		if((sz1 = getFileSize(fname1)) == nil) {
-			// If we DON'T have a test save, by default
-			// we'll create one now, unless the checkOnly
-			// flag is set.
-			if(checkOnly == true)
-				return(nil);
-
-			// Create a new test save.
+		if(checkOnly == true) {
+			// If the checkOnly flag is set, only continue if
+			// there's an existing test save.
+			sz1 = getFileSize(fname1);
+		} else {
+			// Otherwise we create a test save and get its
+			// size.
 			if(!testSave())
 				return(nil);
-
-			// Try to get the size.  If this fails, we're
-			// out of options, bail.
-			if((sz1 = getFileSize(fname1)) == nil)
-				return(nil);
+			sz1 = getFileSize(fname1);
 		}
 
+		// Make sure we got a test size above.
+		if(sz1 == nil)
+			return(nil);
+		
 		// The difference of the two save file sizes.  We
 		// assume the (earlier) "reference" file will be
 		// smaller than the (later) "test" file.

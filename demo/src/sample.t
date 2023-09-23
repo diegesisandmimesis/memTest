@@ -24,11 +24,28 @@
 versionInfo: GameID;
 
 gameMain: GameMainDef
+	_table = nil
+
 	newGame() {
 		if(!memTest.referenceSave()) {
 			"ERROR:  Failed to create reference save\n ";
 			return;
 		}
+
 		memTest.report();
+
+		doStuff();
+
+		memTest.report();
+	}
+
+	// Just add something to the memory footprint.
+	doStuff() {
+		local i;
+
+		_table = new LookupTable();
+		for(i = 0; i < 10000; i++) {
+			_table[i] = rand();
+		}
 	}
 ;
