@@ -9,6 +9,34 @@
 //
 //	Create a "reference" save file using:
 //
+//		// Return value is true on success, nil on failure
+//		memTest.referenceSave();
+//
+//	Then at some later time you see the amount the savefile has grown
+//	by using:
+//
+//		// Outputs a summary of the size difference
+//		memTest.report();
+//
+//	You can "manually" create a test save (the "after" to the reference
+//	save's "before") with:
+//
+//		// Create a savefile of the current state.
+//		memTest.testSave();
+//
+//	And you can get the difference directly via:
+//
+//		// Returns difference, in bytes, between the test and
+//		// reference save files.
+//		memTest.getDifference();
+//
+//	By default both memTest.report() and memTest.getDifference() will
+//	create a new test save when they're called (so they're reporting
+//	the size difference as of the time when they're called).  If
+//	you want to only create test saves via explicit calls to
+//	memTest.testSave() you can call report() and getDifference() with
+//	boolean true as the argument to prevent them from creating a
+//	new test save.
 //		
 //
 #include <adv3.h>
