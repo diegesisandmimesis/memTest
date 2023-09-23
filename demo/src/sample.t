@@ -4,7 +4,7 @@
 // Version 1.0
 // Copyright 2022 Diegesis & Mimesis
 //
-// This is a very simple demonstration "game" for the memTest library.
+// A non-interactive test of the memTest module.
 //
 // It can be compiled via the included makefile with
 //
@@ -21,26 +21,14 @@
 
 #include "memTest.h"
 
-versionInfo: GameID
-        name = 'memTest Library Demo Game'
-        byline = 'Diegesis & Mimesis'
-        desc = 'Demo game for the memTest library. '
-        version = '1.0'
-        IFID = '12345'
-	showAbout() {
-		"This is a simple test game that demonstrates the features
-		of the memTest library.
-		<.p>
-		Consult the README.txt document distributed with the library
-		source for a quick summary of how to use the library in your
-		own games.
-		<.p>
-		The library source is also extensively commented in a way
-		intended to make it as readable as possible. ";
+versionInfo: GameID;
+
+gameMain: GameMainDef
+	newGame() {
+		if(!memTest.referenceSave()) {
+			"ERROR:  Failed to create reference save\n ";
+			return;
+		}
+		memTest.report();
 	}
 ;
-
-startRoom: Room 'Void' "This is a featureless void.";
-+me: Person;
-
-gameMain: GameMainDef initialPlayerChar = me;
