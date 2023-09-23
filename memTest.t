@@ -18,26 +18,29 @@
 //		// Outputs a summary of the size difference
 //		memTest.report();
 //
-//	You can "manually" create a test save (the "after" to the reference
-//	save's "before") with:
 //
-//		// Create a savefile of the current state.
-//		memTest.testSave();
+// METHODS
 //
-//	And you can get the difference directly via:
+//	referenceSave()
+//		Creates the reference save.
 //
-//		// Returns difference, in bytes, between the test and
-//		// reference save files.
-//		memTest.getDifference();
-//
-//	By default both memTest.report() and memTest.getDifference() will
-//	create a new test save when they're called (so they're reporting
-//	the size difference as of the time when they're called).  If
-//	you want to only create test saves via explicit calls to
-//	memTest.testSave() you can call report() and getDifference() with
-//	boolean true as the argument to prevent them from creating a
-//	new test save.
+//	testSave()
+//		Creates a test save.  By default this is called automatically
+//		by report().
 //		
+//	report(checkOnly?)
+//		Outputs the difference in save file sizes.  If the checkOnly
+//		argument is boolean true, no test save will be created
+//		automatically.  If the checkOnly argument is anything else (or
+//		if it's not given) a test save will be created when
+//		report() is called.
+//
+//	getDifference(checkOnly?)
+//		Used internally by report(), this returns the difference
+//		in file sizes in bytes.  Like report(), by default
+//		getDifference() will create a new test save unless the
+//		checkOnly argument is specified and is boolean true.
+//
 //
 #include <adv3.h>
 #include <en_us.h>
